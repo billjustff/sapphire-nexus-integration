@@ -45,20 +45,25 @@ async function admin() {
 
 type ListInput = z.infer<typeof listSchema>;
 
+// Rows are dynamic across 32 tables; the shape is validated at the table layer.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Row = Record<string, any>;
+
 async function runList(db: Awaited<ReturnType<typeof admin>>, input: ListInput) {
-  let query = db.from(input.table).select(input.select).limit(input.limit);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let query: any = db.from(input.table).select(input.select).limit(input.limit);
 
   for (const f of input.filters) {
     if (f.op === "in" && Array.isArray(f.value)) query = query.in(f.column, f.value);
     else if (f.op === "is") query = query.is(f.column, f.value as never);
-    else query = query[f.op](f.column, f.value as never);
+    else query = query[f.op](f.column, f.value);
   }
 
   if (input.orderBy) query = query.order(input.orderBy, { ascending: input.ascending });
 
   const { data, error } = await query;
   if (error) throw new Error(`${input.table}: ${error.message}`);
-  return (data ?? []) as Record<string, unknown>[];
+  return (data ?? []) as Row[];
 }
 
 async function writeAudit(
@@ -103,7 +108,7 @@ export const updateRecord = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
     await writeAudit(db, `${data.table}.updated`, data.table, data.id, data.values);
-    return row as Record<string, unknown>;
+    return row as Row;
   });
 
 export const insertRecord = createServerFn({ method: "POST" })
@@ -123,7 +128,7 @@ export const insertRecord = createServerFn({ method: "POST" })
       (row as { id?: string } | null)?.id ?? null,
       data.values,
     );
-    return row as Record<string, unknown>;
+    return row as Row;
   });
 
 export const deleteRecord = createServerFn({ method: "POST" })
