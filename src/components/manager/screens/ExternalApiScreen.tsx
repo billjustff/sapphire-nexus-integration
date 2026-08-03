@@ -62,27 +62,27 @@ function providerName(providers: Row[], providerId: string | null): string {
 
 function CategoryTrafficChart({ usage, logs }: { usage: Row[]; logs: Row[] }) {
   const usageChart = useMemo(() => {
-    const byDay = new Map<string, { day: string; requests: number; errors: number }>();
+    const byDay: Record<string, { day: string; requests: number; errors: number }> = {};
     for (const row of usage) {
       const d = day(row['day'] as string | null);
-      const entry = byDay.get(d) ?? { day: d, requests: 0, errors: 0 };
+      const entry = byDay[d] ?? { day: d, requests: 0, errors: 0 };
       entry.requests += Number(row['requests'] ?? 0);
       entry.errors += Number(row['errors'] ?? 0);
-      byDay.set(d, entry);
+      byDay[d] = entry;
     }
-    return Array.from(byDay.values());
+    return Object.values(byDay);
   }, [usage]);
 
   const latencyChart = useMemo(() => {
-    const byDay = new Map<string, { day: string; latency: number; count: number }>();
+    const byDay: Record<string, { day: string; latency: number; count: number }> = {};
     for (const row of logs) {
       const d = day(row['occurred_at'] as string | null);
-      const entry = byDay.get(d) ?? { day: d, latency: 0, count: 0 };
+      const entry = byDay[d] ?? { day: d, latency: 0, count: 0 };
       entry.latency += Number(row['latency_ms'] ?? 0);
       entry.count += 1;
-      byDay.set(d, entry);
+      byDay[d] = entry;
     }
-    return Array.from(byDay.values()).map((e) => ({ day: e.day, latency: e.count ? Math.round(e.latency / e.count) : 0 }));
+    return Object.values(byDay).map((e) => ({ day: e.day, latency: e.count ? Math.round(e.latency / e.count) : 0 }));
   }, [logs]);
 
   if (usageChart.length === 0 && latencyChart.length === 0) {
