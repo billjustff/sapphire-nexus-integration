@@ -107,8 +107,13 @@ export default function SecurityScreen({ view }: { view?: string | undefined }) 
     { table: "api_keys", orderBy: "label", ascending: true, limit: 500 },
   ]);
 
-  const [logs, alerts, govRules, services, settings, apiKeys] =
-    many.data ?? [[], [], [], [], [], []];
+  const rowsMany = many.data ?? [[], [], [], [], [], []];
+  const logs: Row[] = rowsMany[0] ?? [];
+  const alerts: Row[] = rowsMany[1] ?? [];
+  const govRules: Row[] = rowsMany[2] ?? [];
+  const services: Row[] = rowsMany[3] ?? [];
+  const settings: Row[] = rowsMany[4] ?? [];
+  const apiKeys: Row[] = rowsMany[5] ?? [];
 
   const isLoading = many.isLoading;
   const error = many.error;
@@ -192,7 +197,7 @@ export default function SecurityScreen({ view }: { view?: string | undefined }) 
   };
 
   // ---------- Abuse detection ----------
-  const abuseByIp = useMemo(() => {
+  const abuseByIp = useMemo((): { ip: string; total: number; errors: number }[] => {
     const map = new Map<string, { ip: string; total: number; errors: number }>();
     for (const l of logs) {
       const ip = String(l["ip"] ?? "unknown");

@@ -100,7 +100,12 @@ export default function EmergencyScreen({ view }: { view?: string | undefined })
     { table: "incidents", orderBy: "started_at", ascending: false, limit: 100 },
   ]);
 
-  const [controls, services, aiModels, wallets, incidents] = many.data ?? [[], [], [], [], []];
+  const rowsMany = many.data ?? [[], [], [], [], []];
+  const controls: Row[] = rowsMany[0] ?? [];
+  const services: Row[] = rowsMany[1] ?? [];
+  const aiModels: Row[] = rowsMany[2] ?? [];
+  const wallets: Row[] = rowsMany[3] ?? [];
+  const incidents: Row[] = rowsMany[4] ?? [];
   const isLoading = many.isLoading;
   const error = many.error;
 

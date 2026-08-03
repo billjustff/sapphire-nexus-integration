@@ -100,8 +100,12 @@ export default function AuditScreen({ view }: { view?: string | undefined }) {
     { table: "api_request_logs", orderBy: "occurred_at", ascending: false, limit: 300 },
   ]);
 
-  const [auditLogs, walletTx, invoices, usageEvents, requestLogs] =
-    many.data ?? [[], [], [], [], []];
+  const rowsMany = many.data ?? [[], [], [], [], []];
+  const auditLogs: Row[] = rowsMany[0] ?? [];
+  const walletTx: Row[] = rowsMany[1] ?? [];
+  const invoices: Row[] = rowsMany[2] ?? [];
+  const usageEvents: Row[] = rowsMany[3] ?? [];
+  const requestLogs: Row[] = rowsMany[4] ?? [];
 
   const isLoading = many.isLoading;
   const error = many.error;
