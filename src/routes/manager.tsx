@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { MANAGER_NAV, findGroup } from "@/lib/manager-nav";
-import { useManyRecords, inr, num } from "@/lib/manager-queries";
+import { inr, num } from "@/components/manager/primitives";
+import { useManyRecords } from "@/lib/manager-queries";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/manager")({
