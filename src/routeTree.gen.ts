@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ManagerRouteImport } from './routes/manager'
+import { Route as ManagerSectionRouteImport } from './routes/manager/$section'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,39 @@ const ManagerRoute = ManagerRouteImport.update({
   path: '/manager',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManagerSectionRoute = ManagerSectionRouteImport.update({
+  id: '/$section',
+  path: '/$section',
+  getParentRoute: () => ManagerRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/manager': typeof ManagerRoute
+  '/manager': typeof ManagerRouteWithChildren
+  '/manager/$section': typeof ManagerSectionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/manager': typeof ManagerRoute
+  '/manager': typeof ManagerRouteWithChildren
+  '/manager/$section': typeof ManagerSectionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/manager': typeof ManagerRoute
+  '/manager': typeof ManagerRouteWithChildren
+  '/manager/$section': typeof ManagerSectionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/manager'
+  fullPaths: '/' | '/manager' | '/manager/$section'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/manager'
-  id: '__root__' | '/' | '/manager'
+  to: '/' | '/manager' | '/manager/$section'
+  id: '__root__' | '/' | '/manager' | '/manager/$section'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ManagerRoute: typeof ManagerRoute
+  ManagerRoute: typeof ManagerRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +74,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manager/$section': {
+      id: '/manager/$section'
+      path: '/$section'
+      fullPath: '/manager/$section'
+      preLoaderRoute: typeof ManagerSectionRouteImport
+      parentRoute: typeof ManagerRoute
+    }
   }
 }
 
+interface ManagerRouteChildren {
+  ManagerSectionRoute: typeof ManagerSectionRoute
+}
+
+const ManagerRouteChildren: ManagerRouteChildren = {
+  ManagerSectionRoute: ManagerSectionRoute,
+}
+
+const ManagerRouteWithChildren =
+  ManagerRoute._addFileChildren(ManagerRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ManagerRoute: ManagerRoute,
+  ManagerRoute: ManagerRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
