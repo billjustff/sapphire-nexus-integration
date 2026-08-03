@@ -90,7 +90,7 @@ export function StatCard({
           <div
             className={cn(
               "rounded-lg bg-gradient-to-br p-2 text-primary-foreground",
-              TONES[tone] ?? TONES.primary,
+              TONES[tone] ?? TONES['primary'],
             )}
           >
             {icon}
@@ -245,7 +245,7 @@ export const day = (value?: string | null) =>
 
 export function downloadRows(filename: string, rows: Record<string, unknown>[]) {
   if (rows.length === 0) return;
-  const headers = Object.keys(rows[0]);
+  const headers = Object.keys(rows[0] ?? {});
   const csv = [
     headers.join(","),
     ...rows.map((r) =>
