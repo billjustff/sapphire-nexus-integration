@@ -3,7 +3,7 @@ import { lazy, Suspense, type ComponentType } from "react";
 import { Spinner } from "./primitives";
 
 export interface ScreenProps {
-  view?: string;
+  view?: string | undefined;
 }
 
 const SCREENS: Record<string, ComponentType<ScreenProps>> = {
