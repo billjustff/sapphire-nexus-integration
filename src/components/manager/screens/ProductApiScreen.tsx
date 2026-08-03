@@ -119,10 +119,13 @@ export default function ProductApiScreen({ view }: { view?: string | undefined }
 
   const rows = useMemo(
     () =>
-      productApis.map((r) => ({
-        ...r,
-        __service: serviceMap.get(String(r['service_id'] ?? "")),
-      })),
+      productApis.map(
+        (r) =>
+          ({
+            ...r,
+            __service: serviceMap.get(String(r['service_id'] ?? "")),
+          }) as Row,
+      ),
     [productApis, serviceMap],
   );
 

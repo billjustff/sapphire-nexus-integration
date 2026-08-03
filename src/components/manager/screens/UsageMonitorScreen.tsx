@@ -78,8 +78,12 @@ export default function UsageMonitorScreen({ view }: { view?: string | undefined
     { table: "usage_daily", orderBy: "day", ascending: false, limit: 1000 },
   ]);
 
-  const [usageEvents, requestLogs, rolePerms, services, usageDaily] =
-    many.data ?? [[], [], [], [], []];
+  const raw = many.data;
+  const usageEvents = raw?.[0] ?? [];
+  const requestLogs = raw?.[1] ?? [];
+  const rolePerms = raw?.[2] ?? [];
+  const services = raw?.[3] ?? [];
+  const usageDaily = raw?.[4] ?? [];
 
   const isLoading = many.isLoading;
   const error = many.error;

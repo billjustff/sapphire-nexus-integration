@@ -100,7 +100,7 @@ export default function RoleApiScreen({ view }: { view?: string | undefined }) {
     () =>
       perms
         .filter((p) => String(p['role_name']).toLowerCase() === activeRole.role)
-        .map((p) => ({ ...p, __service: serviceMap.get(String(p['service_id'] ?? "")) })),
+        .map((p) => ({ ...p, __service: serviceMap.get(String(p['service_id'] ?? "")) }) as Row),
     [perms, serviceMap, activeRole],
   );
 

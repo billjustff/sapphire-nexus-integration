@@ -95,8 +95,14 @@ export default function DashboardScreen({ view }: { view?: string | undefined })
     { table: "incidents", orderBy: "started_at", ascending: false, limit: 25 },
   ]);
 
-  const [services, models, providers, usageDaily, wallets, alerts, incidents] =
-    many.data ?? [[], [], [], [], [], [], []];
+  const raw = many.data;
+  const services = raw?.[0] ?? [];
+  const models = raw?.[1] ?? [];
+  const providers = raw?.[2] ?? [];
+  const usageDaily = raw?.[3] ?? [];
+  const wallets = raw?.[4] ?? [];
+  const alerts = raw?.[5] ?? [];
+  const incidents = raw?.[6] ?? [];
 
   const isLoading = many.isLoading;
   const error = many.error;
