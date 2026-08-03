@@ -102,21 +102,21 @@ function NavTree({ onNavigate }: { onNavigate?: () => void }) {
 function TopBar() {
   const { data } = useManyRecords([
     { table: "api_services", select: "id,status" },
-    { table: "wallets", select: "id,balance,is_primary" },
+    { table: "wallets", select: "id,name,balance,status" },
     { table: "security_alerts", select: "id,status", filters: [{ column: "status", value: "open" }] },
-    { table: "emergency_controls", select: "id,is_engaged" },
+    { table: "emergency_controls", select: "id,engaged" },
   ]);
 
   const stats = useMemo(() => {
     const [services = [], wallets = [], alerts = [], controls = []] = data ?? [];
     const online = services.filter((s) => s['status'] === "active" || s['status'] === "healthy").length;
-    const primary = wallets.find((w) => w['is_primary']) ?? wallets[0];
+    const primary = wallets[0];
     return {
       online,
       total: services.length,
       balance: Number(primary?.['balance'] ?? 0),
       alerts: alerts.length,
-      frozen: controls.some((c) => c['is_engaged']),
+      frozen: controls.some((c) => c['engaged']),
     };
   }, [data]);
 
