@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ManagerRouteImport } from './routes/manager'
+import { Route as ManagerIndexRouteImport } from './routes/manager/index'
 import { Route as ManagerSectionRouteImport } from './routes/manager/$section'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const ManagerRoute = ManagerRouteImport.update({
   path: '/manager',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManagerIndexRoute = ManagerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ManagerRoute,
+} as any)
 const ManagerSectionRoute = ManagerSectionRouteImport.update({
   id: '/$section',
   path: '/$section',
@@ -33,24 +39,26 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/manager': typeof ManagerRouteWithChildren
   '/manager/$section': typeof ManagerSectionRoute
+  '/manager/': typeof ManagerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/manager': typeof ManagerRouteWithChildren
   '/manager/$section': typeof ManagerSectionRoute
+  '/manager': typeof ManagerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/manager': typeof ManagerRouteWithChildren
   '/manager/$section': typeof ManagerSectionRoute
+  '/manager/': typeof ManagerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/manager' | '/manager/$section'
+  fullPaths: '/' | '/manager' | '/manager/$section' | '/manager/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/manager' | '/manager/$section'
-  id: '__root__' | '/' | '/manager' | '/manager/$section'
+  to: '/' | '/manager/$section' | '/manager'
+  id: '__root__' | '/' | '/manager' | '/manager/$section' | '/manager/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -74,6 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manager/': {
+      id: '/manager/'
+      path: '/'
+      fullPath: '/manager/'
+      preLoaderRoute: typeof ManagerIndexRouteImport
+      parentRoute: typeof ManagerRoute
+    }
     '/manager/$section': {
       id: '/manager/$section'
       path: '/$section'
@@ -86,10 +101,12 @@ declare module '@tanstack/react-router' {
 
 interface ManagerRouteChildren {
   ManagerSectionRoute: typeof ManagerSectionRoute
+  ManagerIndexRoute: typeof ManagerIndexRoute
 }
 
 const ManagerRouteChildren: ManagerRouteChildren = {
   ManagerSectionRoute: ManagerSectionRoute,
+  ManagerIndexRoute: ManagerIndexRoute,
 }
 
 const ManagerRouteWithChildren =
