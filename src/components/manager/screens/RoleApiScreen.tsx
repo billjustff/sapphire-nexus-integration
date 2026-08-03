@@ -86,7 +86,7 @@ export default function RoleApiScreen({ view }: { view?: string | undefined }) {
     { table: "usage_events", orderBy: "occurred_at", ascending: false, limit: 2000 },
   ]);
 
-  const [perms, apiServices, usageEvents] = many.data ?? [[], [], []];
+  const [perms, apiServices, usageEvents] = (many.data ?? [[], [], []]) as [Row[], Row[], Row[]];
 
   const serviceMap = useMemo(() => {
     const m = new Map<string, Row>();

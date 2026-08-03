@@ -70,15 +70,15 @@ function providerName(providers: Row[], providerId: string | null): string {
 
 function ModelUsageChart({ usage }: { usage: Row[] }) {
   const chartData = useMemo(() => {
-    const byDay = new Map<string, { day: string; requests: number; cost: number }>();
+    const byDay: Record<string, { day: string; requests: number; cost: number }> = {};
     for (const row of usage) {
       const d = day(row['day'] as string | null);
-      const entry = byDay.get(d) ?? { day: d, requests: 0, cost: 0 };
+      const entry = byDay[d] ?? { day: d, requests: 0, cost: 0 };
       entry.requests += Number(row['requests'] ?? 0);
       entry.cost += Number(row['cost_usd'] ?? 0);
-      byDay.set(d, entry);
+      byDay[d] = entry;
     }
-    return Array.from(byDay.values());
+    return Object.values(byDay);
   }, [usage]);
 
   if (chartData.length === 0) {

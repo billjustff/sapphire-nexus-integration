@@ -86,6 +86,13 @@ export default function UsageMonitorScreen({ view }: { view?: string | undefined
 
   const serviceById = useMemo(() => new Map(services.map((s) => [String(s["id"]), s])), [services]);
 
+  const dailyAvgRequests = useMemo(() => {
+    if (usageDaily.length === 0) return 0;
+    const total = usageDaily.reduce((sum, r) => sum + Number(r["requests"] ?? 0), 0);
+    const days = new Set(usageDaily.map((r) => String(r["day"] ?? ""))).size || 1;
+    return Math.round(total / days);
+  }, [usageDaily]);
+
   // Requests per second: derived from usage_events timestamps in the most recent window.
   const rps = useMemo(() => {
     if (usageEvents.length === 0) return 0;
@@ -246,7 +253,7 @@ export default function UsageMonitorScreen({ view }: { view?: string | undefined
         className="grid grid-cols-2 gap-4 rounded-xl transition-all md:grid-cols-3 lg:grid-cols-6"
       >
         <StatCard label="Requests/Second" value={rps.toFixed(1)} icon={<Gauge className="h-5 w-5" />} tone="primary" />
-        <StatCard label="Total Requests" value={num(totalRequests)} icon={<Activity className="h-5 w-5" />} tone="cyan" />
+        <StatCard label="Total Requests" value={num(totalRequests)} change={`~${num(dailyAvgRequests)}/day avg`} icon={<Activity className="h-5 w-5" />} tone="cyan" />
         <StatCard label="Active Products" value={num(activeProducts)} icon={<Package className="h-5 w-5" />} tone="green" />
         <StatCard label="Failed Requests" value={num(failedCount)} icon={<AlertCircle className="h-5 w-5" />} tone="red" />
         <StatCard label="Avg Latency" value={`${avgLatency} ms`} icon={<Clock className="h-5 w-5" />} tone="amber" />
@@ -442,7 +449,6 @@ export default function UsageMonitorScreen({ view }: { view?: string | undefined
         </GlassCard>
       </div>
 
-      <div className="hidden" aria-hidden data-usage-daily-count={usageDaily.length} />
     </div>
   );
 }
