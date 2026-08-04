@@ -6,7 +6,7 @@ import {
   Globe,
   Key,
   Lock,
-  Map,
+  Map as MapIcon,
   Plus,
   Search,
   Shield,
@@ -276,7 +276,7 @@ export default function SecurityScreen({ view }: { view?: string | undefined }) 
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Denied IPs" value={num(deniedIps.length)} icon={<Ban className="h-5 w-5" />} tone="red" />
-        <StatCard label="Restricted Regions" value={num(blockedRegions.length)} icon={<Map className="h-5 w-5" />} tone="amber" />
+        <StatCard label="Restricted Regions" value={num(blockedRegions.length)} icon={<MapIcon className="h-5 w-5" />} tone="amber" />
         <StatCard label="Abuse Signals" value={num(abuseByIp.length)} icon={<AlertTriangle className="h-5 w-5" />} tone="violet" />
         <StatCard label="Open Security Alerts" value={num(openAlerts.length)} icon={<Shield className="h-5 w-5" />} tone="cyan" />
       </div>
@@ -461,7 +461,7 @@ export default function SecurityScreen({ view }: { view?: string | undefined }) 
                     className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-3"
                   >
                     <div className="flex items-center gap-3">
-                      <Map className="h-4 w-4 text-status-warning" />
+                      <MapIcon className="h-4 w-4 text-status-warning" />
                       <div>
                         <p className="text-sm font-medium text-foreground">{String(r["region"])}</p>
                         <p className="text-xs text-muted-foreground">

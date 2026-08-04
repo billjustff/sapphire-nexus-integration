@@ -19,7 +19,7 @@ const listSchema = z.object({
 });
 
 const listManySchema = z.object({
-  requests: z.array(listSchema).min(1).max(12),
+  requests: z.array(listSchema).min(1).max(24),
 });
 
 const mutateSchema = z.object({
