@@ -333,10 +333,10 @@ function OptimizerContent({
                     <div key={String(model["id"])} className="rounded-lg border border-border/50 bg-secondary/20 p-3">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-foreground">
-                            {String(model["name"])}
-                            {Boolean(model["is_default"]) ? <Badge className="ml-2" variant="outline">default</Badge> : null}
-                          </p>
+                          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                            <span>{String(model["name"])}</span>
+                            {Boolean(model["is_default"]) ? <Badge variant="outline">default</Badge> : null}
+                          </div>
                           <p className="text-xs text-muted-foreground">
                             ${n(model, "input_cost_per_1k").toFixed(4)}/1k tokens · quality {n(model, "quality_score")}
                           </p>
