@@ -25,7 +25,7 @@ const SCREENS: Record<string, ComponentType<ScreenProps>> = {
   settings: lazy(() => import("./screens/SettingsScreen")),
 };
 
-export function ScreenRenderer({ section, view }: { section: string; view?: string }) {
+export function ScreenRenderer({ section, view }: { section: string; view?: string | undefined }) {
   const Screen = SCREENS[section] ?? SCREENS["dashboard"]!;
   return (
     <Suspense fallback={<Spinner />}>
