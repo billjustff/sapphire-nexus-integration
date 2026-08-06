@@ -30,7 +30,7 @@ export default function ErrorMonitorPanel() {
   const resolve = useUpdateRecord("Error marked resolved");
 
   if (query.isLoading) return <LoadingBlock />;
-  if (query.error) return <ErrorState message={(query.error as Error).message} />;
+  if (query.error) return <ErrorState error={query.error} />;
 
   const rows = (query.data ?? []) as Row[];
   const open = rows.filter((r) => !r['resolved']);
@@ -50,7 +50,7 @@ export default function ErrorMonitorPanel() {
       <GlassCard
         title="Runtime Error Monitoring"
         icon={<AlertOctagon className="h-4 w-4 text-primary" />}
-        action={
+        actions={
           <Button variant="outline" size="sm" onClick={() => void query.refetch()}>
             <RefreshCw className="mr-1.5 h-3.5 w-3.5" /> Refresh
           </Button>
