@@ -61,7 +61,13 @@ async function runList(db: Awaited<ReturnType<typeof admin>>, input: ListInput) 
 
   if (input.orderBy) query = query.order(input.orderBy, { ascending: input.ascending });
 
-  const { data, error } = await query;
+  let { data, error } = await query;
+  // Transient auth-clock skew between the sandbox and the backend can reject a
+  // valid key ("JWT issued at future"). Retry once after a short delay.
+  if (error && /issued at future|jwt/i.test(error.message)) {
+    await new Promise((r) => setTimeout(r, 750));
+    ({ data, error } = await query);
+  }
   if (error) throw new Error(`${input.table}: ${error.message}`);
   return (data ?? []) as Row[];
 }
