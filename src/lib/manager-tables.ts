@@ -33,6 +33,7 @@ export const MANAGER_TABLES = [
   "on_device_models",
   "model_versions",
   "system_settings",
+  "error_events",
 ] as const;
 
 export type ManagerTable = (typeof MANAGER_TABLES)[number];

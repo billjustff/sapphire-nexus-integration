@@ -700,6 +700,54 @@ export type Database = {
         }
         Relationships: []
       }
+      error_events: {
+        Row: {
+          created_at: string
+          fingerprint: string
+          fn_name: string | null
+          id: string
+          message: string
+          metadata: Json
+          occurred_at: string
+          resolved: boolean
+          route: string | null
+          severity: string
+          source: string
+          stack: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          fingerprint: string
+          fn_name?: string | null
+          id?: string
+          message: string
+          metadata?: Json
+          occurred_at?: string
+          resolved?: boolean
+          route?: string | null
+          severity?: string
+          source: string
+          stack?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          fingerprint?: string
+          fn_name?: string | null
+          id?: string
+          message?: string
+          metadata?: Json
+          occurred_at?: string
+          resolved?: boolean
+          route?: string | null
+          severity?: string
+          source?: string
+          stack?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       fine_tuning_jobs: {
         Row: {
           base_model: string

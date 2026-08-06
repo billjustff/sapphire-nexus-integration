@@ -34,6 +34,7 @@ import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import ErrorMonitorPanel from "@/components/manager/screens/alerts/ErrorMonitorPanel";
 import { useManyRecords, useUpdateRecord, type Row } from "@/lib/manager-queries";
 import {
   day,
@@ -60,6 +61,7 @@ const SUBSECTIONS = [
   "alert-abnormal",
   "alert-failure",
   "alert-security",
+  "alert-runtime-errors",
 ];
 
 export default function AlertsScreen({ view }: { view?: string | undefined }) {
@@ -268,6 +270,7 @@ function AlertsContent({
           <TabsTrigger value="alert-abnormal">Abnormal Usage</TabsTrigger>
           <TabsTrigger value="alert-failure">API Failure</TabsTrigger>
           <TabsTrigger value="alert-security">Security Breach</TabsTrigger>
+          <TabsTrigger value="alert-runtime-errors">Runtime Errors</TabsTrigger>
         </TabsList>
 
         <TabsContent value="alert-low-wallet">
@@ -572,6 +575,10 @@ function AlertsContent({
               </div>
             )}
           </GlassCard>
+        </TabsContent>
+
+        <TabsContent value="alert-runtime-errors">
+          <ErrorMonitorPanel />
         </TabsContent>
       </Tabs>
     </div>
