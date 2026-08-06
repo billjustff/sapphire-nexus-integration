@@ -181,6 +181,7 @@ export const MANAGER_NAV: NavGroup[] = [
       { id: "alert-abnormal", label: "Abnormal Usage Alert", icon: AlertTriangle },
       { id: "alert-failure", label: "API Failure Alert", icon: AlertCircle },
       { id: "alert-security", label: "Security Breach Alert", icon: Shield },
+      { id: "alert-runtime-errors", label: "Runtime Error Monitoring", icon: AlertCircle },
     ],
   },
   {
