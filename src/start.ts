@@ -35,7 +35,7 @@ const errorMiddleware = createMiddleware().server(async ({ next, request }) => {
 // Records every failing server action (server function) before rethrowing so
 // the caller still sees the original error.
 const serverFnErrorMonitor = createMiddleware({ type: "function" }).server(
-  async ({ next, functionId }) => {
+  async ({ next, ...ctx }) => {
     try {
       return await next();
     } catch (error) {
@@ -45,7 +45,7 @@ const serverFnErrorMonitor = createMiddleware({ type: "function" }).server(
           source: "server_fn",
           message: error instanceof Error ? error.message : String(error),
           stack: error instanceof Error ? error.stack : undefined,
-          fnName: String(functionId ?? "unknown"),
+          fnName: String((ctx as { functionId?: string }).functionId ?? "server_fn"),
         });
       }
       throw error;
