@@ -11,7 +11,9 @@ import {
   Cloud,
   Cpu,
   CreditCard,
+  Database,
   DollarSign,
+  RefreshCw,
   Download,
   Eye,
   FileText,
@@ -247,6 +249,16 @@ export const MANAGER_NAV: NavGroup[] = [
       { id: "reg-decisions", label: "AI Decision Logs", icon: Brain },
       { id: "reg-automation", label: "Automation Rules", icon: Zap },
       { id: "reg-reports", label: "Reports", icon: BarChart3 },
+    ],
+  },
+  {
+    id: "gateway",
+    label: "Gateway Engine",
+    icon: GitBranch,
+    children: [
+      { id: "gw-router", label: "Request Router", icon: GitBranch },
+      { id: "gw-cache", label: "Response Cache", icon: Database },
+      { id: "gw-failover", label: "Failover System", icon: RefreshCw },
     ],
   },
   {
