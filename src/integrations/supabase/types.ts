@@ -584,6 +584,42 @@ export type Database = {
           },
         ]
       }
+      cache_entries: {
+        Row: {
+          cache_key: string
+          cost_saved_usd: number
+          created_at: string
+          hits: number
+          id: string
+          last_hit_at: string | null
+          model: string
+          size_kb: number
+          ttl_hours: number
+        }
+        Insert: {
+          cache_key: string
+          cost_saved_usd?: number
+          created_at?: string
+          hits?: number
+          id?: string
+          last_hit_at?: string | null
+          model: string
+          size_kb?: number
+          ttl_hours?: number
+        }
+        Update: {
+          cache_key?: string
+          cost_saved_usd?: number
+          created_at?: string
+          hits?: number
+          id?: string
+          last_hit_at?: string | null
+          model?: string
+          size_kb?: number
+          ttl_hours?: number
+        }
+        Relationships: []
+      }
       cost_recommendations: {
         Row: {
           category: string
@@ -745,6 +781,36 @@ export type Database = {
           source?: string
           stack?: string | null
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      failover_events: {
+        Row: {
+          extra_latency_ms: number
+          from_model: string
+          id: string
+          occurred_at: string
+          reason: string
+          result: string
+          to_model: string
+        }
+        Insert: {
+          extra_latency_ms?: number
+          from_model: string
+          id?: string
+          occurred_at?: string
+          reason: string
+          result?: string
+          to_model: string
+        }
+        Update: {
+          extra_latency_ms?: number
+          from_model?: string
+          id?: string
+          occurred_at?: string
+          reason?: string
+          result?: string
+          to_model?: string
         }
         Relationships: []
       }
@@ -1225,6 +1291,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      router_rules: {
+        Row: {
+          active: boolean
+          created_at: string
+          fallback_model: string | null
+          id: string
+          matches_30d: number
+          name: string
+          pattern: string
+          priority: string
+          sort_order: number
+          target_model: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          fallback_model?: string | null
+          id?: string
+          matches_30d?: number
+          name: string
+          pattern: string
+          priority?: string
+          sort_order?: number
+          target_model: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          fallback_model?: string | null
+          id?: string
+          matches_30d?: number
+          name?: string
+          pattern?: string
+          priority?: string
+          sort_order?: number
+          target_model?: string
+        }
+        Relationships: []
       }
       safety_policies: {
         Row: {
