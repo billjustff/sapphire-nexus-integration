@@ -250,6 +250,16 @@ export const MANAGER_NAV: NavGroup[] = [
     ],
   },
   {
+    id: "gateway",
+    label: "Gateway Engine",
+    icon: GitBranch,
+    children: [
+      { id: "gw-router", label: "Request Router", icon: GitBranch },
+      { id: "gw-cache", label: "Response Cache", icon: Database },
+      { id: "gw-failover", label: "Failover System", icon: RefreshCw },
+    ],
+  },
+  {
     id: "governance",
     label: "AI Governance",
     icon: Brain,
