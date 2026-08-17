@@ -191,9 +191,9 @@ export function StatusBadge({ value, className }: { value?: string | null; class
 
 export function LoadingBlock({ rows = 4 }: { rows?: number }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5" role="status" aria-busy="true" aria-label="Loading">
       {Array.from({ length: rows }).map((_, i) => (
-        <Skeleton key={i} className="h-10 w-full" />
+        <Skeleton key={i} className="h-10 w-full rounded-xl" />
       ))}
     </div>
   );
@@ -201,27 +201,38 @@ export function LoadingBlock({ rows = 4 }: { rows?: number }) {
 
 export function Spinner() {
   return (
-    <div className="flex items-center justify-center py-10 text-muted-foreground">
-      <Loader2 className="h-5 w-5 animate-spin" />
+    <div className="flex items-center justify-center gap-2 py-12 text-sm text-muted-foreground">
+      <Loader2 className="h-4 w-4 animate-spin" /> Loading…
     </div>
   );
 }
 
 export function EmptyState({ message }: { message: string }) {
   return (
-    <div className="rounded-lg border border-dashed border-border/60 py-10 text-center text-sm text-muted-foreground">
-      {message}
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border px-6 py-12 text-center sm:py-16">
+      <div className="mb-3 grid h-11 w-11 place-items-center rounded-xl border border-border bg-surface text-muted-foreground">
+        <Loader2 className="h-4 w-4 opacity-0" aria-hidden />
+      </div>
+      <p className="text-sm font-medium text-foreground">Nothing here yet</p>
+      <p className="mt-1 max-w-sm text-sm text-muted-foreground">{message}</p>
     </div>
   );
 }
 
 export function ErrorState({ error }: { error: unknown }) {
   return (
-    <div className="rounded-lg border border-status-error/40 bg-status-error/10 p-4 text-sm text-status-error">
-      {error instanceof Error ? error.message : "Failed to load data"}
+    <div
+      role="alert"
+      className="rounded-2xl border border-destructive/40 bg-destructive/10 p-4 text-sm text-destructive"
+    >
+      <p className="font-semibold">Something went wrong</p>
+      <p className="mt-1 text-destructive/90">
+        {error instanceof Error ? error.message : "Failed to load data"}
+      </p>
     </div>
   );
 }
+
 
 /** Wraps query state into loading / error / empty / content. */
 export function QueryBoundary<T>({
