@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Loader2 } from "lucide-react";
+import { AlertCircle, Inbox, Loader2 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,9 +22,9 @@ export function PageHeader({
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40 bg-[radial-gradient(60%_120%_at_85%_0%,rgba(255,255,255,0.35),transparent_60%)]"
       />
-      <div className="relative flex flex-wrap items-end justify-between gap-4">
+      <div className="relative grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:flex-wrap sm:justify-between">
         <div className="min-w-0">
-          <h1 className="truncate text-2xl font-semibold tracking-tight sm:text-3xl lg:text-[34px]">
+          <h1 className="text-2xl font-semibold sm:text-3xl lg:text-[34px]">
             {title}
           </h1>
           {description ? (
@@ -33,7 +33,7 @@ export function PageHeader({
             </p>
           ) : null}
         </div>
-        {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
+        {actions ? <div className="flex shrink-0 flex-wrap justify-end gap-2">{actions}</div> : null}
       </div>
     </header>
   );
@@ -124,7 +124,7 @@ export function StatCard({
           {loading ? (
             <Skeleton className="h-8 w-24" />
           ) : (
-            <p className="text-2xl font-semibold tracking-tight text-foreground">{value}</p>
+            <p className="text-2xl font-semibold text-foreground">{value}</p>
           )}
           <p className="mt-1 text-xs font-medium text-muted-foreground">{label}</p>
         </div>
@@ -209,9 +209,9 @@ export function Spinner() {
 
 export function EmptyState({ message }: { message: string }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border px-6 py-12 text-center sm:py-16">
-      <div className="mb-3 grid h-11 w-11 place-items-center rounded-xl border border-border bg-surface text-muted-foreground">
-        <Loader2 className="h-4 w-4 opacity-0" aria-hidden />
+    <div className="flex min-h-56 flex-col items-center justify-center px-6 py-12 text-center sm:py-16">
+      <div className="mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-primary/15 text-primary">
+        <Inbox className="h-5 w-5" aria-hidden />
       </div>
       <p className="text-sm font-medium text-foreground">Nothing here yet</p>
       <p className="mt-1 max-w-sm text-sm text-muted-foreground">{message}</p>
@@ -223,8 +223,11 @@ export function ErrorState({ error }: { error: unknown }) {
   return (
     <div
       role="alert"
-      className="rounded-2xl border border-destructive/40 bg-destructive/10 p-4 text-sm text-destructive"
+      className="bento-card flex min-h-56 flex-col items-center justify-center border-destructive/40 px-6 py-12 text-center text-sm text-destructive"
     >
+      <div className="mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-destructive/15">
+        <AlertCircle className="h-5 w-5" aria-hidden />
+      </div>
       <p className="font-semibold">Something went wrong</p>
       <p className="mt-1 text-destructive/90">
         {error instanceof Error ? error.message : "Failed to load data"}

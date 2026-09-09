@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground border border-border/60 shadow-sm hover:bg-secondary/80 hover:border-primary/30 hover:shadow-[0_10px_28px_-16px_var(--color-primary)]",
         ghost:
           "text-muted-foreground hover:text-foreground hover:bg-primary/10 hover:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-primary)_25%,transparent)]",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary underline-offset-4 hover:underline hover:drop-shadow-[0_0_10px_color-mix(in_oklab,var(--color-primary)_55%,transparent)]",
       },
       size: {
         default: "h-10 px-5 py-2",
