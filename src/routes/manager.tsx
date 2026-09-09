@@ -15,6 +15,7 @@ import {
 
 import { MANAGER_NAV, findGroup, type NavGroup } from "@/lib/manager-nav";
 import { inr, num } from "@/components/manager/primitives";
+import { Button } from "@/components/ui/button";
 import { useManyRecords } from "@/lib/manager-queries";
 import { cn } from "@/lib/utils";
 
@@ -103,31 +104,40 @@ function SidebarContent({
           )}
         </Link>
         {!collapsed && (
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
             onClick={onToggleCollapsed}
-            className="ml-auto hidden h-8 w-8 place-items-center rounded-lg border border-sidebar-border text-muted-foreground transition-colors hover:text-foreground lg:grid"
+            className="ml-auto hidden h-8 w-8 rounded-lg border border-sidebar-border lg:flex"
             aria-label="Collapse sidebar"
           >
             <PanelLeftClose className="h-4 w-4" />
-          </button>
+          </Button>
         )}
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
           onClick={onCloseMobile}
-          className="ml-auto grid h-8 w-8 place-items-center rounded-lg border border-sidebar-border text-muted-foreground lg:hidden"
+          className="ml-auto h-8 w-8 rounded-lg border border-sidebar-border lg:hidden"
           aria-label="Close menu"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Button>
       </div>
 
       {collapsed && (
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
           onClick={onToggleCollapsed}
-          className="mx-auto mt-3 hidden h-8 w-8 place-items-center rounded-lg border border-sidebar-border text-muted-foreground hover:text-foreground lg:grid"
+          className="mx-auto mt-3 hidden h-8 w-8 rounded-lg border border-sidebar-border lg:flex"
           aria-label="Expand sidebar"
         >
           <PanelLeftOpen className="h-4 w-4" />
-        </button>
+        </Button>
       )}
 
       {!collapsed && (
@@ -173,23 +183,27 @@ function SidebarContent({
                   {!collapsed && <span className="truncate">{group.label}</span>}
                 </Link>
                 {!collapsed && (
-                  <button
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="icon"
                     aria-label={`Toggle ${group.label}`}
                     aria-expanded={open}
                     onClick={() => setOpenGroups((s) => ({ ...s, [group.id]: !open }))}
-                    className="rounded-lg p-1 text-muted-foreground transition-colors hover:text-foreground"
+                    className="h-7 w-7 rounded-lg"
                   >
                     <ChevronDown
                       className={cn("h-3.5 w-3.5 transition-transform duration-200", open && "rotate-180")}
                     />
-                  </button>
+                  </Button>
                 )}
               </div>
 
               {!collapsed && open ? (
                 <div className="mt-0.5 ml-4 space-y-0.5 border-l border-sidebar-border pl-2">
-                  {group.children.map((child) => {
+                  {group.children
+                    .filter((child) => !filtered || group.children.some((match) => match.id === child.id && match.label.toLowerCase().includes(query.trim().toLowerCase())) || group.label.toLowerCase().includes(query.trim().toLowerCase()))
+                    .map((child) => {
                     const ChildIcon = child.icon;
                     const childActive = isActive && activeView === child.id;
                     return (
@@ -251,16 +265,19 @@ function TopBar({ onOpenMobile }: { onOpenMobile: () => void }) {
     "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium";
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-xl sm:px-6">
-      <button
+     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-3 backdrop-blur-xl lg:px-5">
+       <Button
+         type="button"
+         variant="ghost"
+         size="icon"
         onClick={onOpenMobile}
-        className="icon3d grid h-9 w-9 shrink-0 place-items-center rounded-xl text-muted-foreground hover:text-foreground lg:hidden"
+         className="icon3d h-9 w-9 shrink-0 rounded-xl lg:hidden"
         aria-label="Open navigation"
       >
         <Menu className="h-[18px] w-[18px]" />
-      </button>
+       </Button>
 
-      <p className="truncate text-sm font-semibold tracking-tight">{group?.label ?? "AI API Manager"}</p>
+       <p className="truncate text-sm font-semibold">{group?.label ?? "AI API Manager"}</p>
 
       <div className="ml-auto flex items-center gap-2">
         <span className={cn(pill, "hidden border-status-success/40 text-status-success sm:inline-flex")}>
@@ -310,8 +327,10 @@ function ManagerLayout() {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <button
-            className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+          <Button
+            type="button"
+            variant="ghost"
+            className="absolute inset-0 h-auto w-auto rounded-none bg-background/70 p-0 backdrop-blur-sm hover:bg-background/70"
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu overlay"
           />
