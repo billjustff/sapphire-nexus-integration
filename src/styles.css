@@ -7,7 +7,7 @@
 /*
  * SOFTWARE VALA — ENTERPRISE DESIGN SYSTEM
  * Deep navy surface + premium enterprise blue, dark-first.
- * HSL triplets live in :root; Tailwind v4 tokens wrap them in hsl().
+ * Reference OKLCH colors are the canonical palette; HSL aliases preserve legacy chart APIs.
  */
 
 :root {
@@ -34,91 +34,91 @@
   --reference-input: oklch(1 0 0 / 11%);
   --reference-ring: oklch(0.58 0.19 255 / 55%);
 
-  /* Core */
-  --background: 216 57% 9%;
-  --foreground: 211 47% 98%;
-  --surface: 216 42% 12%;
-  --surface-1: 216 42% 12%;
-  --surface-2: 216 40% 14%;
+  /* Legacy HSL aliases: exact sRGB equivalents of the reference OKLCH palette. */
+  --background: 215.791774 57.412545% 8.791233%;
+  --foreground: 211.167053 46.976677% 97.578516%;
+  --surface: 215.792692 42.210261% 12.481954%;
+  --surface-1: 215.792692 42.210261% 12.481954%;
+  --surface-2: 215.782272 30.468721% 18.270294%;
 
-  --card: 216 45% 12%;
-  --card-foreground: 211 47% 98%;
-  --popover: 216 40% 13%;
-  --popover-foreground: 211 47% 98%;
+  --card: 215.793241 45.168046% 11.546055%;
+  --card-foreground: 211.167053 46.976677% 97.578516%;
+  --popover: 215.791486 39.631627% 13.426339%;
+  --popover-foreground: 211.167053 46.976677% 97.578516%;
 
   /* Brand */
-  --primary: 209 98% 46%;
-  --primary-foreground: 210 60% 99%;
-  --primary-glow: 208 91% 56%;
-  --brand: 209 98% 46%;
-  --brand-foreground: 210 60% 99%;
-  --brand-red: 360 76% 58%;
+  --primary: 209.188899 97.887596% 45.704888%;
+  --primary-foreground: 210.740354 100% 98.876217%;
+  --primary-glow: 207.823503 90.987138% 55.827325%;
+  --brand: 209.188899 97.887596% 45.704888%;
+  --brand-foreground: 210.740354 100% 98.876217%;
+  --brand-red: 359.773258 76.334720% 58.117228%;
 
-  --secondary: 216 30% 18%;
-  --secondary-foreground: 211 47% 98%;
-  --muted: 216 29% 16%;
-  --muted-foreground: 214 16% 68%;
-  --accent: 214 40% 21%;
-  --accent-foreground: 211 47% 98%;
-  --accent-pink: 262 55% 71%;
-  --accent-amber: 42 85% 63%;
-  --accent-emerald: 160 62% 46%;
-  --destructive: 360 76% 58%;
-  --destructive-foreground: 210 60% 99%;
-  --success: 160 62% 46%;
-  --warning: 42 85% 63%;
+  --secondary: 215.782272 30.468721% 18.270294%;
+  --secondary-foreground: 211.167053 46.976677% 97.578516%;
+  --muted: 215.777816 28.986324% 16.161330%;
+  --muted-foreground: 213.933769 16.138522% 68.103514%;
+  --accent: 213.640661 39.606684% 21.337177%;
+  --accent-foreground: 211.167053 46.976677% 97.578516%;
+  --accent-pink: 261.749165 55.084554% 71.050281%;
+  --accent-amber: 41.814351 85.216342% 62.509807%;
+  --accent-emerald: 159.832178 61.707451% 46.471712%;
+  --destructive: 359.773258 76.334720% 58.117228%;
+  --destructive-foreground: 210.740354 100% 98.876217%;
+  --success: 159.832178 61.707451% 46.471712%;
+  --warning: 41.814351 85.216342% 62.509807%;
 
-  --border: 216 30% 22%;
-  --input: 216 30% 25%;
-  --ring: 209 98% 46%;
+  --border: 0 0% 100% / 9%;
+  --input: 0 0% 100% / 11%;
+  --ring: 209.188899 97.887596% 45.704888% / 55%;
 
   /* Sidebar */
-  --sidebar: 216 57% 9%;
-  --sidebar-background: 216 57% 9%;
-  --sidebar-foreground: 214 16% 78%;
-  --sidebar-primary: 209 98% 46%;
-  --sidebar-primary-foreground: 210 60% 99%;
-  --sidebar-accent: 214 40% 21%;
-  --sidebar-accent-foreground: 211 47% 98%;
-  --sidebar-border: 216 30% 20%;
-  --sidebar-ring: 209 98% 46%;
+  --sidebar: 215.791774 57.412545% 8.791233%;
+  --sidebar-background: 215.791774 57.412545% 8.791233%;
+  --sidebar-foreground: 213.933769 16.138522% 68.103514%;
+  --sidebar-primary: 209.188899 97.887596% 45.704888%;
+  --sidebar-primary-foreground: 210.740354 100% 98.876217%;
+  --sidebar-accent: 213.640661 39.606684% 21.337177%;
+  --sidebar-accent-foreground: 211.167053 46.976677% 97.578516%;
+  --sidebar-border: 0 0% 100% / 9%;
+  --sidebar-ring: 209.188899 97.887596% 45.704888% / 55%;
 
   /* Charts */
-  --chart-1: 209 98% 46%;
-  --chart-2: 208 91% 56%;
-  --chart-3: 160 62% 46%;
-  --chart-4: 42 85% 63%;
-  --chart-5: 262 55% 71%;
+  --chart-1: 209.188899 97.887596% 45.704888%;
+  --chart-2: 207.823503 90.987138% 55.827325%;
+  --chart-3: 159.832178 61.707451% 46.471712%;
+  --chart-4: 41.814351 85.216342% 62.509807%;
+  --chart-5: 261.749165 55.084554% 71.050281%;
 
   /* Status */
-  --status-success: 160 62% 46%;
-  --status-warning: 42 85% 63%;
-  --status-error: 360 76% 58%;
-  --status-info: 208 91% 56%;
-  --status-pending: 42 85% 63%;
+  --status-success: 159.832178 61.707451% 46.471712%;
+  --status-warning: 41.814351 85.216342% 62.509807%;
+  --status-error: 359.773258 76.334720% 58.117228%;
+  --status-info: 207.823503 90.987138% 55.827325%;
+  --status-pending: 41.814351 85.216342% 62.509807%;
 
-  /* Accent aliases (kept for existing screens; retuned to the palette) */
-  --neon-cyan: 195 85% 55%;
-  --neon-teal: 175 65% 45%;
-  --neon-green: 160 62% 46%;
-  --neon-violet: 262 55% 71%;
-  --neon-orange: 25 85% 60%;
-  --neon-red: 360 76% 58%;
-  --neon-purple: 262 55% 71%;
-  --neon-blue: 208 91% 56%;
-  --neon-pink: 320 60% 68%;
-  --neon-gold: 42 85% 63%;
-  --sapphire: 209 98% 46%;
-  --aurora-violet: 262 55% 71%;
-  --aurora-purple: 262 55% 66%;
-  --aurora-blue: 208 91% 56%;
-  --aurora-cyan: 195 85% 55%;
-  --aurora-teal: 175 65% 45%;
-  --aurora-green: 160 62% 46%;
-  --aurora-gold: 42 85% 63%;
-  --aurora-orange: 25 85% 60%;
-  --aurora-rose: 350 70% 65%;
-  --aurora-pink: 320 60% 68%;
+  /* Legacy accent names map only to colors in the reference palette. */
+  --neon-cyan: 207.823503 90.987138% 55.827325%;
+  --neon-teal: 159.832178 61.707451% 46.471712%;
+  --neon-green: 159.832178 61.707451% 46.471712%;
+  --neon-violet: 261.749165 55.084554% 71.050281%;
+  --neon-orange: 41.814351 85.216342% 62.509807%;
+  --neon-red: 359.773258 76.334720% 58.117228%;
+  --neon-purple: 261.749165 55.084554% 71.050281%;
+  --neon-blue: 207.823503 90.987138% 55.827325%;
+  --neon-pink: 261.749165 55.084554% 71.050281%;
+  --neon-gold: 41.814351 85.216342% 62.509807%;
+  --sapphire: 209.188899 97.887596% 45.704888%;
+  --aurora-violet: 261.749165 55.084554% 71.050281%;
+  --aurora-purple: 261.749165 55.084554% 71.050281%;
+  --aurora-blue: 207.823503 90.987138% 55.827325%;
+  --aurora-cyan: 207.823503 90.987138% 55.827325%;
+  --aurora-teal: 159.832178 61.707451% 46.471712%;
+  --aurora-green: 159.832178 61.707451% 46.471712%;
+  --aurora-gold: 41.814351 85.216342% 62.509807%;
+  --aurora-orange: 41.814351 85.216342% 62.509807%;
+  --aurora-rose: 261.749165 55.084554% 71.050281%;
+  --aurora-pink: 261.749165 55.084554% 71.050281%;
 
   /* Gradients */
   --gradient-brand: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
@@ -148,12 +148,12 @@
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: var(--reference-background);
   --color-foreground: var(--reference-foreground);
   --color-surface: var(--reference-surface);
-  --color-surface-2: hsl(var(--surface-2));
+  --color-surface-2: var(--reference-secondary);
   --color-card: var(--reference-card);
   --color-card-foreground: var(--reference-foreground);
   --color-popover: var(--reference-popover);
@@ -161,8 +161,8 @@
   --color-primary: var(--reference-primary);
   --color-primary-foreground: var(--reference-primary-foreground);
   --color-primary-glow: var(--reference-primary-glow);
-  --color-brand: hsl(var(--brand));
-  --color-brand-foreground: hsl(var(--brand-foreground));
+  --color-brand: var(--reference-primary);
+  --color-brand-foreground: var(--reference-primary-foreground);
   --color-secondary: var(--reference-secondary);
   --color-secondary-foreground: var(--reference-foreground);
   --color-muted: var(--reference-muted);
@@ -174,49 +174,54 @@
   --color-accent-emerald: var(--reference-accent-emerald);
   --color-destructive: var(--reference-destructive);
   --color-destructive-foreground: var(--reference-primary-foreground);
-  --color-success: hsl(var(--success));
-  --color-warning: hsl(var(--warning));
+  --color-success: var(--reference-accent-emerald);
+  --color-warning: var(--reference-accent-amber);
   --color-border: var(--reference-border);
   --color-input: var(--reference-input);
   --color-ring: var(--reference-ring);
-  --color-ring-offset-background: hsl(var(--background));
+  --color-ring-offset-background: var(--reference-background);
 
-  --color-chart-1: hsl(var(--chart-1));
-  --color-chart-2: hsl(var(--chart-2));
-  --color-chart-3: hsl(var(--chart-3));
-  --color-chart-4: hsl(var(--chart-4));
-  --color-chart-5: hsl(var(--chart-5));
+  --color-chart-1: var(--reference-primary);
+  --color-chart-2: var(--reference-primary-glow);
+  --color-chart-3: var(--reference-accent-emerald);
+  --color-chart-4: var(--reference-accent-amber);
+  --color-chart-5: var(--reference-accent-pink);
 
-  --color-sidebar: hsl(var(--sidebar));
-  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
-  --color-sidebar-primary: hsl(var(--sidebar-primary));
-  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
-  --color-sidebar-accent: hsl(var(--sidebar-accent));
-  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
-  --color-sidebar-border: hsl(var(--sidebar-border));
-  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --color-sidebar: var(--reference-background);
+  --color-sidebar-foreground: var(--reference-muted-foreground);
+  --color-sidebar-primary: var(--reference-primary);
+  --color-sidebar-primary-foreground: var(--reference-primary-foreground);
+  --color-sidebar-accent: var(--reference-accent);
+  --color-sidebar-accent-foreground: var(--reference-foreground);
+  --color-sidebar-border: var(--reference-border);
+  --color-sidebar-ring: var(--reference-ring);
 
-  --color-status-success: hsl(var(--status-success));
-  --color-status-warning: hsl(var(--status-warning));
-  --color-status-error: hsl(var(--status-error));
-  --color-status-info: hsl(var(--status-info));
-  --color-status-pending: hsl(var(--status-pending));
+  --color-status-success: var(--reference-accent-emerald);
+  --color-status-warning: var(--reference-accent-amber);
+  --color-status-error: var(--reference-destructive);
+  --color-status-info: var(--reference-primary-glow);
+  --color-status-pending: var(--reference-accent-amber);
 
-  --color-neon-cyan: hsl(var(--neon-cyan));
-  --color-neon-teal: hsl(var(--neon-teal));
-  --color-neon-green: hsl(var(--neon-green));
-  --color-neon-violet: hsl(var(--neon-violet));
-  --color-neon-orange: hsl(var(--neon-orange));
-  --color-neon-red: hsl(var(--neon-red));
-  --color-neon-blue: hsl(var(--neon-blue));
-  --color-neon-pink: hsl(var(--neon-pink));
-  --color-neon-gold: hsl(var(--neon-gold));
-  --color-sapphire: hsl(var(--sapphire));
-  --color-aurora-violet: hsl(var(--aurora-violet));
-  --color-aurora-cyan: hsl(var(--aurora-cyan));
-  --color-aurora-green: hsl(var(--aurora-green));
-  --color-aurora-gold: hsl(var(--aurora-gold));
-  --color-aurora-rose: hsl(var(--aurora-rose));
+  --color-neon-cyan: var(--reference-primary-glow);
+  --color-neon-teal: var(--reference-accent-emerald);
+  --color-neon-green: var(--reference-accent-emerald);
+  --color-neon-violet: var(--reference-accent-pink);
+  --color-neon-orange: var(--reference-accent-amber);
+  --color-neon-red: var(--reference-destructive);
+  --color-neon-blue: var(--reference-primary-glow);
+  --color-neon-pink: var(--reference-accent-pink);
+  --color-neon-gold: var(--reference-accent-amber);
+  --color-sapphire: var(--reference-primary);
+  --color-aurora-violet: var(--reference-accent-pink);
+  --color-aurora-purple: var(--reference-accent-pink);
+  --color-aurora-blue: var(--reference-primary-glow);
+  --color-aurora-cyan: var(--reference-primary-glow);
+  --color-aurora-teal: var(--reference-accent-emerald);
+  --color-aurora-green: var(--reference-accent-emerald);
+  --color-aurora-gold: var(--reference-accent-amber);
+  --color-aurora-orange: var(--reference-accent-amber);
+  --color-aurora-rose: var(--reference-accent-pink);
+  --color-aurora-pink: var(--reference-accent-pink);
 
   --shadow-card: var(--shadow-card);
   --shadow-hero: var(--shadow-hero);
